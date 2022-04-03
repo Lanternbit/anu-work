@@ -14,6 +14,13 @@ let centerY;
 let centerZ;
 let c = 20;
 let cam;
+let img;
+let bg;
+let angle=0.3;
+
+function preload(){ img=loadImage('https://upload.wikimedia.org/wikipedia/commons/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg');
+                   bg=loadImage('https://as2.ftcdn.net/v2/jpg/02/79/13/95/1000_F_279139559_pfkrZ9W2LBfXaYYCKHNuh52bzqgzLwd0.jpg');
+}
 
 function setup() {
   createCanvas(600, 600, WEBGL);
@@ -84,6 +91,16 @@ function draw() {
   normalMaterial();
   sphere(20);
   pop();
+  
+   push()
+  texture(img);
+  rotateX(angle*0.3);
+  rotateY(angle*0.6);
+  rotateZ(angle*0.9);
+  sphere(40);
+  angle +=0.06;
+  pop()
+  
   translate(-w / 2, -h / 2);
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
@@ -96,5 +113,16 @@ function draw() {
     }
     endShape();
   }
-
+  push()
+  texture(bg);
+  translate(700,550,100);
+  pointLight(0,0,255 ,200,-200,0)
+  // Rotate on all three axis.
+  rotateX(angle*0.3);
+  rotateY(angle*0.6);
+  rotateZ(angle*0.9);
+  // Set the shape
+  torus(200, 10,1000,1000);
+  angle +=0.06;
+  pop()
 }
